@@ -1,13 +1,28 @@
 import React, {FC} from 'react';
-import {AppBar, Container, Typography} from "@mui/material";
-import {StyledToolbar} from './styled';
+import {AppBar, Container} from "@mui/material";
+import {StyledHeaderLink, StyledToolbar} from './styled';
+import {useTypedDispatch, useTypedSelector} from "../../core/hooks/redux";
+import {selectAuth, setAuthStatus} from "../../core/store/reducers/auth-slice";
 
 const Header: FC = () => {
+  const dispatch = useTypedDispatch();
+  const {isAuth} = useTypedSelector(selectAuth);
+
+  const onLogout = () => {
+    dispatch(setAuthStatus(false));
+  };
+
   return (
     <AppBar position='static'>
       <Container>
         <StyledToolbar disableGutters>
-          <Typography variant='h3'>Pokemons</Typography>
+          <StyledHeaderLink to='/'>Pokemons</StyledHeaderLink>
+          {
+            !isAuth ?
+            <StyledHeaderLink to='/authorization'>Login</StyledHeaderLink>
+            :
+            <StyledHeaderLink to='/' onClick={onLogout}>Logout</StyledHeaderLink>
+          }
         </StyledToolbar>
       </Container>
     </AppBar>

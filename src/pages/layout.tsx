@@ -8,7 +8,7 @@ const Layout: FC = () => {
     <>
       <CssBaseline/>
       <Header/>
-      <Container>
+      <Container sx={{pt: 2}}>
         <Outlet/>
       </Container>
     </>
