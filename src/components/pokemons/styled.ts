@@ -10,6 +10,6 @@ export const PokemonsCardInner = styled(Card)(({theme}) => ({
 }));
 
 export const PokemonsCardContent = styled(Box)(() => ({
-  padding: '5px 10px 5px'
+  padding: '5px 10px 5px',
 }));
 

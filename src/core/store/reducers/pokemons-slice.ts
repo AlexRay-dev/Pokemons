@@ -23,9 +23,9 @@ export const pokemonsSlice = createSlice({
     },
     pokemonsFetchingSuccess(state, action: PayloadAction<DetailedPokemon[]>) {
       state.isLoading = false;
-      state.pokemons = [...state.pokemons, ...action.payload];
+      state.pokemons = action.payload;
     },
-    pokemonsFetchingError(state, action) {
+    pokemonsFetchingError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -35,7 +35,7 @@ export const pokemonsSlice = createSlice({
 export const {
   pokemonsFetching,
   pokemonsFetchingSuccess,
-  pokemonsFetchingError
-} = pokemonsSlice.actions
+  pokemonsFetchingError,
+} = pokemonsSlice.actions;
 export const selectPokemons = (state: RootState) => state.pokemonsReducer;
 export default pokemonsSlice.reducer;

@@ -15,7 +15,6 @@ const PokemonsItem: FC<PokemonsItemProps> = ({pokemon}) => {
           height="194"
           image={pokemon.sprites.front_shiny}
         />
-
         <PokemonsCardContent>
           <Typography variant='body1'>Name: {pokemon.name}</Typography>
           <Typography variant='body1'>Base experience: {pokemon.base_experience}</Typography>
