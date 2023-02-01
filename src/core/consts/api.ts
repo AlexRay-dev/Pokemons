@@ -3,5 +3,5 @@ interface IAPI {
 }
 
 export const API: IAPI = {
-  URL: 'https://pokeapi.co/api/v2/'
+  URL: 'https://pokeapi.co/api/v2'
 };
