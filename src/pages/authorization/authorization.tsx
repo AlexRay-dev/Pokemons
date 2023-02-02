@@ -22,7 +22,7 @@ const Authorization: FC = () => {
     if (isValid) {
       dispatch(setAuthStatus(true));
       dispatch(setUserData({name: login}));
-      navigate('/');
+      navigate('/user-page');
       return;
     }
     setSnackbarOpen(true);

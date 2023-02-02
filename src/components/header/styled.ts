@@ -11,5 +11,8 @@ export const StyledHeaderLink = styled(NavLink)(() => ({
   color: 'white',
   ':hover': {
     textDecoration: 'underline',
+  },
+  ':not(:last-child)': {
+    marginRight: '25px',
   }
 }));

@@ -20,6 +20,7 @@ const PokemonsItem: FC<PokemonsItemProps> = ({pokemon}) => {
           <Typography variant='body1'>Base experience: {pokemon.base_experience}</Typography>
           <Typography variant='body1'>Height: {pokemon.height}</Typography>
           <Typography variant='body1'>Weight: {pokemon.weight}</Typography>
+          <Typography variant='body1'>Weight: {pokemon.order}</Typography>
         </PokemonsCardContent>
       </PokemonsCardInner>
     </Grid>

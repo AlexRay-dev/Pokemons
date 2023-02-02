@@ -2,13 +2,13 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {DetailedPokemon} from "../../types/pokemons";
 
-interface TimelineState {
+interface PokemonsState {
   isLoading: boolean,
   error: string,
   pokemons: any[],
 }
 
-const initialState: TimelineState = {
+const initialState: PokemonsState = {
   isLoading: false,
   error: '',
   pokemons: [],
