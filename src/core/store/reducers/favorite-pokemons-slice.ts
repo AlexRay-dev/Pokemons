@@ -15,7 +15,7 @@ const initialState: FavoritePokemonsState = {
 };
 
 const favoritePokemonsSlice = createSlice({
-  name: "favorite-pokemons",
+  name: 'favorite-pokemons',
   initialState,
   reducers: {
     favoritePokemonsFetching(state, action: PayloadAction<boolean>) {

@@ -19,7 +19,7 @@ export const fetchPokemons = (page: number) => async (dispatch: AppDispatch) => 
   }
 };
 
-export const fetchDetailedPokemon = async (pokemonUrl: string): Promise<DetailedPokemon | undefined> => {
+const fetchDetailedPokemon = async (pokemonUrl: string): Promise<DetailedPokemon | undefined> => {
   try {
     const response = await axios.get<DetailedPokemon>(pokemonUrl);
     return response.data;

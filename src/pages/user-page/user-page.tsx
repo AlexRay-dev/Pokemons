@@ -1,21 +1,21 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import {useAction} from "../../core/hooks/use-action";
-import {Box, FormControl, MenuItem, Select, Typography} from "@mui/material";
+import {Box,Typography} from "@mui/material";
 import {useTypedSelector} from "../../core/hooks/redux";
 import {selectUserData} from "../../core/store/reducers/user-slice";
 import {selectFavoritePokemons} from "../../core/store/reducers/favorite-pokemons-slice";
 import CustomPagination from "../../components/pagination/custom-pagination";
 import Loading from "../../components/loading/loading";
 import FavoritePokemonsList from "../../components/pokemons/favorite-pokemons-list";
-import {getCurrentPokemonTypes} from "../../core/utils/utils";
 import {DEFAULT_POKEMON_TYPE_FILTER} from "../../core/consts/config";
-import {getFilteredPokemons} from "../../components/pokemons/utils";
+import {getCurrentPokemonTypes, getFilteredPokemons} from "../../components/pokemons/utils";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
 import Chart from "../../components/chart/chart";
 import {getHighchartsOptions} from "../../components/chart/utils";
 import {selectAuth} from "../../core/store/reducers/auth-slice";
 import {NavLink} from "react-router-dom";
+import PokemonTypeFilter from "../../components/pokemons/pokemon-type-filter";
 
 const UserPage: FC = React.memo(() => {
   const {fetchUserFavoritePokemons} = useAction();
@@ -47,28 +47,16 @@ const UserPage: FC = React.memo(() => {
   }, [selectedType, favoritePokemons]);
 
   if (!isAuth) return (
-    <Typography variant="h4">
+    <Typography variant='h3'>
       Please <NavLink to='/authorization'>login</NavLink> to view this page
     </Typography>)
-  if (error) return <Typography variant="h4">{error}</Typography>;
+  if (error) return <Typography variant='h4'>{error}</Typography>;
 
   return (
     <Box>
-      <Typography variant="h2">Hello {currentUser.name}</Typography>
+      <Typography variant='h2'>Hello {currentUser.name}</Typography>
       <CustomPagination {...paginationProps}/>
-      <FormControl fullWidth size="small" sx={{mt: ".6rem"}}>
-        <Typography variant="h6" mb=".1rem">Filter by pokemon type</Typography>
-
-        <Select
-          value={selectedType}
-          onChange={(e) => setSelectedType(e.target.value)}
-        >
-          <MenuItem key="all" value={DEFAULT_POKEMON_TYPE_FILTER}>{DEFAULT_POKEMON_TYPE_FILTER}</MenuItem>
-          {pokemonTypes.map(type => (
-            <MenuItem key={type} value={type}>{type}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <PokemonTypeFilter selectedType={selectedType} setSelectedType={setSelectedType} pokemonTypes={pokemonTypes}/>
 
       {isLoading
         ? <Loading/>

@@ -21,9 +21,9 @@ const Home: FC = () => {
 
     useEffect(() => {
       fetchPokemons(currentPage);
-    }, [currentPage])
+    }, [currentPage]);
 
-    if (error) return <Typography variant="h4">{error}</Typography>;
+    if (error) return <Typography variant='h4'>{error}</Typography>;
 
     return (
       <Box>

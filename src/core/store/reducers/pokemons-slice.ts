@@ -15,7 +15,7 @@ const initialState: PokemonsState = {
 }
 
 const pokemonsSlice = createSlice({
-  name: "pokemons",
+  name: 'pokemons',
   initialState,
   reducers: {
     pokemonsFetching(state, action: PayloadAction<boolean>) {

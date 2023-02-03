@@ -9,11 +9,11 @@ import UserPage from "./pages/user-page/user-page";
 const App: FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout/>}>
+      <Route path='/' element={<Layout/>}>
         <Route index element={<Home/>}/>
-        <Route path="/authorization" element={<Authorization/>}/>
-        <Route path="/user-page" element={<UserPage/>}/>
-        <Route path="*" element={<NotFound/>}/>
+        <Route path='/authorization' element={<Authorization/>}/>
+        <Route path='/user-page' element={<UserPage/>}/>
+        <Route path='*' element={<NotFound/>}/>
       </Route>
     </Routes>
   );

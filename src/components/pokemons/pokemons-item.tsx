@@ -1,9 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
-import {CardMedia,  Grid, Typography} from "@mui/material";
+import {CardMedia, Grid, Typography} from "@mui/material";
 import {PokemonsCardContent, PokemonsCardInner} from "./styled";
 import {DetailedPokemon} from "../../core/types/pokemons";
 import {IMAGE_PLACEHOLDER} from "../../core/consts/api";
-import {getPokemonTypes} from "./utils";
+import {getPokemonTypesString} from "./utils";
 
 interface PokemonsItemProps {
   pokemon: DetailedPokemon,
@@ -17,11 +17,11 @@ const PokemonsItem: FC<PokemonsItemProps> = React.memo(({pokemon}) => {
     const imageLoader = new Image();
     imageLoader.src = imageUrl;
     imageLoader.onload = () => setImage(imageUrl);
-    imageLoader.onerror = () => setImage(`${IMAGE_PLACEHOLDER.ULR}/268x194?text=image not found`);
+    imageLoader.onerror = () => setImage(`${IMAGE_PLACEHOLDER.URL}/268x194?text=image not found`);
   }, [pokemon.sprites.front_shiny]);
 
   return (
-    <Grid item xs={6}  md={4} lg={3} >
+    <Grid item xs={6} md={4} lg={3}>
       <PokemonsCardInner>
         <CardMedia
           component="img"
@@ -33,7 +33,7 @@ const PokemonsItem: FC<PokemonsItemProps> = React.memo(({pokemon}) => {
           <Typography variant='body1'>Base experience: {pokemon.base_experience}</Typography>
           <Typography variant='body1'>Height: {pokemon.height}</Typography>
           <Typography variant='body1'>Weight: {pokemon.weight}</Typography>
-          <Typography variant='body1'>Types: {getPokemonTypes(pokemon)}</Typography>
+          <Typography variant='body1'>Types: {getPokemonTypesString(pokemon)}</Typography>
         </PokemonsCardContent>
       </PokemonsCardInner>
     </Grid>

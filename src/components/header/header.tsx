@@ -16,15 +16,13 @@ const Header: FC = () => {
     <AppBar position='static'>
       <Container>
         <StyledToolbar disableGutters>
-          <Stack direction="row">
+          <Stack direction='row'>
             <StyledHeaderLink to='/'>Pokemons</StyledHeaderLink>
             {isAuth && <StyledHeaderLink to='/user-page'>My page</StyledHeaderLink>}
           </Stack>
-          {
-            !isAuth ?
-              <StyledHeaderLink to='/authorization'>Login</StyledHeaderLink>
-              :
-              <StyledHeaderLink to='/' onClick={onLogout}>Logout</StyledHeaderLink>
+          {!isAuth
+            ? <StyledHeaderLink to='/authorization'>Login</StyledHeaderLink>
+            : <StyledHeaderLink to='/' onClick={onLogout}>Logout</StyledHeaderLink>
           }
         </StyledToolbar>
       </Container>

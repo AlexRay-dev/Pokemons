@@ -31,35 +31,35 @@ const Authorization: FC = () => {
   return (
     <AuthorizationContainer>
       <AuthorizationInner>
-        <Stack component="form" direction="column" alignItems="flex-end" width="100%" onSubmit={submitHandler}>
+        <Stack component='form' direction='column' alignItems='flex-end' width='100%' onSubmit={submitHandler}>
           <TextField
             required
-            label="Login"
-            variant="standard"
+            label='Login'
+            variant='standard'
             fullWidth
-            margin="dense"
+            margin='dense'
             value={login}
             onChange={(e) => setLogin(e.target.value)}
           />
           <TextField
             required
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            variant="standard"
+            label='Password'
+            type='password'
+            autoComplete='current-password'
+            variant='standard'
             fullWidth
-            margin="dense"
+            margin='dense'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <CustomButton type="submit" size="medium" sx={{mt: 2}}>Login</CustomButton>
+          <CustomButton type='submit' size='medium' sx={{mt: 2}}>Login</CustomButton>
         </Stack>
         <Snackbar
           anchorOrigin={{vertical: 'top', horizontal: 'center'}}
           open={isSnackbarOpen}
           onClose={() => setSnackbarOpen(false)}
           autoHideDuration={3000}
-          message="Invalid login or password"
+          message='Invalid login or password'
         />
       </AuthorizationInner>
     </AuthorizationContainer>

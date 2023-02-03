@@ -11,7 +11,7 @@ interface FavoritePokemonsListProps {
 
 const FavoritePokemonsList: FC<FavoritePokemonsListProps> = ({pokemons, currentPage}) => {
   return (
-    <Grid container spacing={3} padding="15px 0 30px">
+    <Grid container spacing={3} padding='15px 0 30px'>
       {pokemons
         .slice((currentPage - 1) * POKEMONS_LIMIT, currentPage * POKEMONS_LIMIT)
         .map(pokemon => (

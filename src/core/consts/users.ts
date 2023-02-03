@@ -1,8 +1,4 @@
-interface IUser {
-  login: string,
-  password: string,
-  favoritePokemonsIndices: number[],
-}
+import {IUser} from "../types/user";
 
 const USERS: IUser[] = [
   {

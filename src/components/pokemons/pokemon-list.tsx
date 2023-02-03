@@ -9,7 +9,7 @@ interface IPokemonListProps {
 
 const PokemonList: FC<IPokemonListProps> = React.memo(({pokemons}) => {
   return (
-    <Grid container spacing={3} padding="15px 0 30px">
+    <Grid container spacing={3} padding='15px 0 30px'>
       {pokemons.map(pokemon => (
         <PokemonsItem key={pokemon.id} pokemon={pokemon}/>
       ))}
