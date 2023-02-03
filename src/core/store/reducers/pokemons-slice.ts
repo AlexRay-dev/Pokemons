@@ -14,7 +14,7 @@ const initialState: PokemonsState = {
   pokemons: [],
 }
 
-export const pokemonsSlice = createSlice({
+const pokemonsSlice = createSlice({
   name: "pokemons",
   initialState,
   reducers: {

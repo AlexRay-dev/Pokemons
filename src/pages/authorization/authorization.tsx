@@ -17,11 +17,11 @@ const Authorization: FC = () => {
 
   const submitHandler = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const isValid = USERS.some(user => user.login === login && user.password === password);
+    const user = USERS.find(user => user.login === login && user.password === password);
 
-    if (isValid) {
+    if (user) {
       dispatch(setAuthStatus(true));
-      dispatch(setUserData({name: login}));
+      dispatch(setUserData({name: login, favoritePokemonsIndices: user.favoritePokemonsIndices}));
       navigate('/user-page');
       return;
     }
@@ -55,9 +55,9 @@ const Authorization: FC = () => {
           <CustomButton type="submit" size="medium" sx={{mt: 2}}>Login</CustomButton>
         </Stack>
         <Snackbar
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          anchorOrigin={{vertical: 'top', horizontal: 'center'}}
           open={isSnackbarOpen}
-          onClose={() => setSnackbarOpen(false )}
+          onClose={() => setSnackbarOpen(false)}
           autoHideDuration={3000}
           message="Invalid login or password"
         />

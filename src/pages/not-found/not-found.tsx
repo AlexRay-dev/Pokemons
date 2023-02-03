@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
-import {Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 
 const NotFound: FC = () => {
   return (
-    <div>
+    <Box>
       <Typography variant='h3'>
-        Page is not found
+        Page not found
       </Typography>
-    </div>
+    </Box>
   );
 };
 

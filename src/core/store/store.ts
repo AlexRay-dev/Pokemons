@@ -2,11 +2,13 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import authReducer from './reducers/auth-slice'
 import userReducer from './reducers/user-slice'
 import pokemonsReducer from './reducers/pokemons-slice'
+import favoritePokemonsReducer from './reducers/favorite-pokemons-slice'
 
 const rootReducer = combineReducers({
   authReducer,
   userReducer,
   pokemonsReducer,
+  favoritePokemonsReducer,
 });
 
 const setupStore = () => {
