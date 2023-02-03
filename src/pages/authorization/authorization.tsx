@@ -9,8 +9,8 @@ import USERS from "../../core/consts/users";
 import {setUserData} from "../../core/store/reducers/user-slice";
 
 const Authorization: FC = () => {
-  const [login, setLogin] = useState<string>('user123');
-  const [password, setPassword] = useState<string>('user123');
+  const [login, setLogin] = useState<string>('Reg84569');
+  const [password, setPassword] = useState<string>('Reg84569');
   const [isSnackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();

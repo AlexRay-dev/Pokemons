@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {useAction} from "../../core/hooks/use-action";
 import {Box, FormControl, MenuItem, Select, Typography} from "@mui/material";
 import {useTypedSelector} from "../../core/hooks/redux";
@@ -10,38 +10,52 @@ import FavoritePokemonsList from "../../components/pokemons/favorite-pokemons-li
 import {getCurrentPokemonTypes} from "../../core/utils/utils";
 import {DEFAULT_POKEMON_TYPE_FILTER} from "../../core/consts/config";
 import {getFilteredPokemons} from "../../components/pokemons/utils";
+import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts/highstock";
+import Chart from "../../components/chart/chart";
+import {getHighchartsOptions} from "../../components/chart/utils";
+import {selectAuth} from "../../core/store/reducers/auth-slice";
+import {NavLink} from "react-router-dom";
 
 const UserPage: FC = React.memo(() => {
   const {fetchUserFavoritePokemons} = useAction();
+  const {isAuth} = useTypedSelector(selectAuth);
   const {currentUser} = useTypedSelector(selectUserData);
   const {error, isLoading, favoritePokemons} = useTypedSelector(selectFavoritePokemons);
+  const [chartOptions, setChartOptions] = useState<Highcharts.Options>(getHighchartsOptions(favoritePokemons));
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedType, setSelectedType] = useState(DEFAULT_POKEMON_TYPE_FILTER);
+  const [pokemonTypes, setPokemonTypes] = useState<string[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState(favoritePokemons);
+  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const paginationProps = {currentPage, setCurrentPage, totalPokemonCount: filteredPokemons.length};
-  const [currentTypes, setCurrentTypes] = useState<string[]>([]);
 
   useEffect(() => {
-    if (favoritePokemons.length) setCurrentTypes(getCurrentPokemonTypes(favoritePokemons));
+    if (currentUser) fetchUserFavoritePokemons(currentUser.favoritePokemonsIndices);
+  }, []);
+
+  useEffect(() => {
+    if (favoritePokemons.length) setPokemonTypes(getCurrentPokemonTypes(favoritePokemons));
   }, [favoritePokemons]);
 
   useEffect(() => {
-    if (currentUser) {
-      fetchUserFavoritePokemons(currentUser.favoritePokemonsIndices)
-    }
-  }, []);
+    setChartOptions(getHighchartsOptions(filteredPokemons));
+  }, [filteredPokemons]);
 
   useEffect(() => {
     setFilteredPokemons(getFilteredPokemons(selectedType, favoritePokemons));
   }, [selectedType, favoritePokemons]);
 
+  if (!isAuth) return (
+    <Typography variant="h4">
+      Please <NavLink to='/authorization'>login</NavLink> to view this page
+    </Typography>)
   if (error) return <Typography variant="h4">{error}</Typography>;
 
   return (
     <Box>
       <Typography variant="h2">Hello {currentUser.name}</Typography>
       <CustomPagination {...paginationProps}/>
-
       <FormControl fullWidth size="small" sx={{mt: ".6rem"}}>
         <Typography variant="h6" mb=".1rem">Filter by pokemon type</Typography>
 
@@ -50,7 +64,7 @@ const UserPage: FC = React.memo(() => {
           onChange={(e) => setSelectedType(e.target.value)}
         >
           <MenuItem key="all" value={DEFAULT_POKEMON_TYPE_FILTER}>{DEFAULT_POKEMON_TYPE_FILTER}</MenuItem>
-          {currentTypes.map(type => (
+          {pokemonTypes.map(type => (
             <MenuItem key={type} value={type}>{type}</MenuItem>
           ))}
         </Select>
@@ -58,7 +72,11 @@ const UserPage: FC = React.memo(() => {
 
       {isLoading
         ? <Loading/>
-        : <FavoritePokemonsList pokemons={filteredPokemons} currentPage={currentPage}/>
+        :
+        <Box>
+          <FavoritePokemonsList pokemons={filteredPokemons} currentPage={currentPage}/>
+          {chartOptions && <Chart options={chartOptions} chartComponentRef={chartComponentRef}/>}
+        </Box>
       }
     </Box>
   );
